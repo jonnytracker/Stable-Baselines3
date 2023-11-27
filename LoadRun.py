@@ -10,10 +10,10 @@ env = gym.make('LunarLander-v2', render_mode='human')
 env = DummyVecEnv([lambda: env]) 
 
 models_dir = "models/PPO"
-model_path = f"{models_dir}/20000.zip"
+model_path = f"{models_dir}/300000.zip"
 
 
-model = PPO.load(model_path, env=env)
+model = PPO.load(model_path, env=env, device='cuda')
 
 episodes = 10
 

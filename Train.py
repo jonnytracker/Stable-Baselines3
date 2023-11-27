@@ -3,7 +3,7 @@ import os
 from stable_baselines3 import PPO, A2C, DQN
 
 
-models_dir = "models/A2C"
+models_dir = "models/PPO"
 log_dir = "logs"
 
 
@@ -20,13 +20,13 @@ env = gym.make('LunarLander-v2', render_mode='human')
 env.reset()
 
 
-model = A2C("MlpPolicy", env, verbose=1, tensorboard_log=log_dir, device='cuda')
+model = PPO("MlpPolicy", env, verbose=1, tensorboard_log=log_dir, device='cuda')
+
 
 TIMESTEPS = 100000
 
-
 for i in range(1,30):
-    model.learn(total_timesteps=TIMESTEPS, reset_num_timesteps=False, tb_log_name="A2C", progress_bar=True)
+    model.learn(total_timesteps=TIMESTEPS, reset_num_timesteps=False, tb_log_name="PPO", progress_bar=True)
     model.save(f"{models_dir}/{TIMESTEPS*i}")
 
 
