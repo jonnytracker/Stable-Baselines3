@@ -20,6 +20,7 @@ if not os.path.exists(log_dir):
 
 
 env = gym.make("LunarLander-v2", render_mode="human")
+env.reset()
 
 
 # Create the callback
@@ -33,7 +34,7 @@ model = PPO("MlpPolicy", env, verbose=1, tensorboard_log=log_dir, device="cuda")
 # Load existing model
 try:
     model_path = f"{models_dir}/PPO_10000_steps.zip"
-    model = PPO.load(model_path, env=env, device='cuda', print_system_info=True)
+    model = PPO.load(model_path, env=env, device='cuda', print_system_info=True, force_reset=True)
 except:
     print("load fail ... ")
 
