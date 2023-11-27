@@ -30,9 +30,12 @@ callback = CheckpointCallback(save_freq=SAVE_FREQ, save_path=models_dir, name_pr
 model = PPO("MlpPolicy", env, verbose=1, tensorboard_log=log_dir, device="cuda")
 
 
-
-model_path = f"{models_dir}/PPO_10000_steps.zip"
-model = PPO.load(model_path, env=env, device='cuda', print_system_info=True)
+# Load existing model
+try:
+    model_path = f"{models_dir}/PPO_10000_steps.zip"
+    model = PPO.load(model_path, env=env, device='cuda', print_system_info=True)
+except:
+    print("load fail ... ")
 
 
 
