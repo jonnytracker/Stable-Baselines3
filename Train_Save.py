@@ -26,8 +26,17 @@ env = gym.make("LunarLander-v2", render_mode="human")
 callback = CheckpointCallback(save_freq=SAVE_FREQ, save_path=models_dir, name_prefix="PPO",save_replay_buffer=True,
     save_vecnormalize=True,)
 
+# Create Model
 model = PPO("MlpPolicy", env, verbose=1, tensorboard_log=log_dir, device="cuda")
 
+
+
+model_path = f"{models_dir}/PPO_10000_steps.zip"
+model = PPO.load(model_path, env=env, device='cuda', print_system_info=True)
+
+
+
+# Train the model
 model.learn(total_timesteps=TIMESTEPS, reset_num_timesteps=False, tb_log_name="PPO", progress_bar=True, callback=callback,)
 
 
